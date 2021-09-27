@@ -1,8 +1,6 @@
-set -eu
+set -eux
 
 build_contest_library() {
-    read -p "atcoder_library's branch name:" branch_name
-
     git clone git@github.com:hiro116s/heuristics-contest-library.git
     cd heuristics-contest-library
     ./gradlew jar
@@ -10,9 +8,10 @@ build_contest_library() {
 }
 
 build_atcoder_library() {
+    read -p "atcoder_library's branch name:" branch_name
     git clone git@github.com:hiro116s/atcoder_library.git
     cd atcoder_library
-    git co $branch_name
+    git checkout $branch_name
     cd src/main/java
     javac Main.java
     cp ~/heuristics-contest-library/build/libs/heuristics-contest-library-1.0-SNAPSHOT.jar .
